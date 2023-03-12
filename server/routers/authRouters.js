@@ -5,5 +5,5 @@ export const authRouters = Router();
 
 authRouters.post('/login', loginController);
 
-authRouters.post('/register/', registerController);
+authRouters.post('/register', registerController);
 
