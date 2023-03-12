@@ -2,22 +2,24 @@ import mongoose from 'mongoose';
 
 const schema = mongoose.Schema({
     firstname:{
-        type:String(),
+        type:String,
         maxLength:20,
         minLength: 5
     },
     lastname: {
-        type:String(),
+        type:String,
         maxLength:20,
         minLength: 5
     },
     password:{
-        type:String(),
+        type:String,
         max:20,
-        min: 5
+        min: 5,
+        unique:true
     },
     email:  {
-        type:String(),
+        type:String,
+        match: /.+\@.+\..+/,
         unique: true
     },
 })
