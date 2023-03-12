@@ -31,7 +31,6 @@ export const loginController = async (req, res)=>{
    }catch(err){
      return res.json({'error':true, 'message': "login failed"});
    }
-  
 
 } 
 
