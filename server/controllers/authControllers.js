@@ -36,27 +36,33 @@ export const loginController = async (req, res)=>{
 
 export const registerController = async (req, res)=>{
 
-   const body = req.body
-   console.log(body)
-   // const {error} =  registerCredentialValidation(req.body);
-   // if(error){
-   //    return res.json({'error':true, 'message':error.message()})
-   // }
+   const body = req.body;
+  
+   const {error} =  registerCredentialValidation(body);
+   if(error){
+      return res.json({'error':true, 'message':error.message})
+   }
 
-   // const user =  await User.findOne({email:body.email});
-   // if(user){
-   //    return res.json({'error':true, 'message':'email already in use'})
-   // }
+   const user =  await User.findOne({email:body.email});
+   console.log(user)
+   if(user){
+      const compareHashed = await bcrypt.compare(body.password, user.password);
+      if(compareHashed){
+      return res.status(500).json({'error':true, 'message':'password already in use'})
+   }
+      return res.status(500).json({'error':true, 'message':'email already in use'})
+   }
    
-   // const salt = await bcrypt.genSalt(saltRound);
-   // const hashed = await bcrypt.hash(body.password, salt);
-   // const compareHashed = await bcrypt.compare(hashed, user.password);
 
-   // if(compareHashed){
-   //    return res.json({'error':true, 'message':'password already in use'})
-   // }
-
-   // return res.json({'error':false, 'message':'register successfully'});
-    res.end()
+   const salt = await bcrypt.genSalt(saltRound);
+   const hashed = await bcrypt.hash(body.password, salt);
+   // console.log(hashed)
+   await new User({firstname:body.firstname,
+      lastname:body.lastname, 
+      password:hashed, 
+      email:body.email 
+   }).save();
+   return res.status(200).json({'error':false,  'message':'register successfully'});
+   //  res.end()
 } 
 

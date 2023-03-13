@@ -10,10 +10,10 @@ export function registerCredentialValidation(body){
         password :Joi.string().min(5).max(10).required()
      })
 
-    schema.validate({
-        'firstname':body.firstname,
-        'lastname':body.lastname,
-         'email':body.email, 
-         'password': body.password
+    return schema.validate({
+        firstname:body.firstname,
+        lastname:body.lastname,
+         email:body.email, 
+         password: body.password
         });
 }
