@@ -7,5 +7,5 @@ export function loginCredentialValidation(body){
         password :Joi.string().min(5).max(10).required()
      })
 
-    schema.validate({email, password});
+    return schema.validate({email, password});
 }
