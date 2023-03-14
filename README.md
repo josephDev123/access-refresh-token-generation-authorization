@@ -15,6 +15,8 @@ joi
 To get started, create a new Node.js project using your preferred package manager. Once you've created your project, install the necessary dependencies by running the following command:
 
 ```
+git clone url
+cd server
 npm install jsonwebtoken bcrypt joi
 
 ```
